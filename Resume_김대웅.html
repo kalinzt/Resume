@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dave's TCMS</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: hsl(271, 99%, 63%);
+            padding: 5px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #86009e;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+        }
+
+        section.active {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 초기에 첫 번째 섹션을 활성화
+            activateSection("profile");
+
+            // 각 메뉴를 클릭했을 때 해당 섹션을 활성화
+            document.querySelectorAll("nav a").forEach(function (menuLink) {
+                menuLink.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    // 클릭한 메뉴에 해당하는 섹션 활성화
+                    var targetSectionId = menuLink.getAttribute("data-target");
+                    activateSection(targetSectionId);
+                });
+            });
+
+            // 섹션을 활성화하는 함수
+            function activateSection(sectionId) {
+                // 모든 섹션 비활성화
+                document.querySelectorAll("section").forEach(function (section) {
+                    section.classList.remove("active");
+                });
+
+                // 클릭한 메뉴에 해당하는 섹션 활성화
+                document.getElementById(sectionId).classList.add("active");
+
+                // 해당 섹션에 HTML 파일 불러오기
+                fetchSectionContent(sectionId);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1 style="margin-left:1cm;">RESUME_김대웅</h1>
+    <h3 style="margin-left:1cm;">환경과 업무 적응이 뛰어난 QA 엔지니어</h3>
+
+    <nav>
+        <a href="#" data-target="profile">프로필</a>
+        <a href="#" data-target="carear">경력사항</a>
+        <a href="#" data-target="potpol">포트폴리오</a>
+        <a href="#" data-target="intro">자기소개서</a>
+    </nav>
+
+    <section id="profile"></section>
+    <section id="carear"></section>
+    <section id="potpol"></section>
+    <section id="intro"></section>
+
+</body>
+
+</html>
